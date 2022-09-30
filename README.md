@@ -1,3 +1,8 @@
+# Introduction 
+This website was created using Tailwind CSS, node.js and react.js.
+API used : [Meme_API](https://github.com/D3vd/Meme_Api)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
