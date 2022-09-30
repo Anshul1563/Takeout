@@ -4,6 +4,7 @@ export default function Main() {
   const [memeData, setMemeData] = React.useState({
     topText: "",
     randomImage: "",
+    subreddit : "",
   });
 
   const [allMemes, setAllMemes] = React.useState([]);
@@ -11,14 +12,15 @@ export default function Main() {
   React.useEffect(() => {
     async function getMemes() {
       try {
-        if (count > 0) {
+        if (count > 0 && memeData.subreddit.toLowerCase() != memeData.topText) {
+          console.log("before fetch")
           const res = await fetch(
             `https://meme-api.herokuapp.com/gimme/${memeData.topText}/30`
-          );
-		  if (res.ok){
-			const data = await res.json();
-          	setAllMemes(data.memes);
-		  }
+          )
+          if (res.ok){
+            const data = await res.json();
+            setAllMemes(data.memes);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -30,13 +32,15 @@ export default function Main() {
   React.useEffect(() => {
     if (allMemes.length > 0) {
       let num = Math.floor(Math.random() * allMemes.length);
+      console.log("meme set")
       setMemeData((prevState) => {
-        return { ...prevState, randomImage: allMemes[num].url };
+        return { ...prevState, randomImage: allMemes[num].url, subreddit : allMemes[num].subreddit };
       });
     }
-  }, [allMemes]);
+  },[allMemes]);
 
   function handleChange(event) {
+    console.log("text changed")
     const { name, value } = event.target;
     setMemeData((prevState) => {
       return { ...prevState, [name]: value };
@@ -47,12 +51,20 @@ export default function Main() {
   function handleSubmit(event) {
     event.preventDefault();
     setCount(count + 1);
-  }
+    if (memeData.subreddit.toLowerCase() == memeData.topText && allMemes.length > 0) {
+      let num = Math.floor(Math.random() * allMemes.length);
+      console.log("meme set")
+      setMemeData((prevState) => {
+        return { ...prevState, randomImage: allMemes[num].url, subreddit : allMemes[num].subreddit };
+      });
+    }
 
+  }
+  console.log(memeData)
   return (
     <div className="flex flex-col items-center">
       <form onSubmit={handleSubmit}>
-        <div className="flex mt-16 mb-8 justify-center">
+        <div className="flex mt-16 mb-8 justify-center gap-4">
           <input
             className="w-96 rounded-lg slate"
             type="text"
@@ -61,12 +73,12 @@ export default function Main() {
             value={memeData.topText}
             onChange={handleChange}
           />
-        </div>
-        <button className="bg-slate-800 text-2xl p-2 text-white font-jost w-[52rem] rounded-lg hover: ring-green-600 hover:ring-4 duration-300">
+          <button className="bg-slate-800 text-2xl p-2 text-white font-jost w-72 rounded-lg hover: ring-green-600 hover:ring-4 duration-300">
           Generate a post
         </button>
+        </div>
       </form>
-      <img src={memeData.randomImage} className="h-96 mt-4" />
+      {memeData.randomImage && <img src={memeData.randomImage} className="h-[40rem] mt-4 p-2 border-4 border-black rounded-lg mb-6  " />}
     </div>
   );
 }
