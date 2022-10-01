@@ -15,7 +15,7 @@ export default function App() {
       setSub(val)
     }
     return (
-      <div >
+      <div>
         <Header sub = {sub}  />
         <Main sub = {handleSub}/>
       </div>
