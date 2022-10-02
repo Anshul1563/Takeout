@@ -1,6 +1,6 @@
 # Setup
 Make sure to run :
-### `npm install react-modules`
+### `npm install react-scripts`
 
 # Getting Started with Create React App
 
