@@ -2,15 +2,8 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}",],
   theme: {
-    extend: {
-      backgroundImage: {
-        'logo': "url('./images/React-icon.svg')",
-      }
-    },
-    fontFamily : {
-      'jost': ['Jost','sans-serif'],
-      'inter': ['Inter', 'sans-serif']
-    }
+    extend: {},
+    fontFamily : {}
   },
-  plugins: [require('@tailwindcss/forms'),],
+  plugins: [],
 }
