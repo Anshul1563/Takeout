@@ -1,7 +1,5 @@
-# Introduction 
-This website was created using Tailwind CSS, node.js and react.js.\
-API used : [Meme_API](https://github.com/D3vd/Meme_Api)
-
+# Setup
+Make sure to run npm install react-modules
 
 # Getting Started with Create React App
 
